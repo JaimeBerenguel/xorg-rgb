@@ -22,7 +22,10 @@
 .\" not be used in advertising or otherwise to promote the sale, use or
 .\" other dealings in this Software without prior written authorization
 .\" from The Open Group.
-.TH SHOWRGB 1 "Release 6.4" "X Version 11"
+.\"
+.\" $XFree86: xc/programs/rgb/showrgb.man,v 1.8 2002/10/12 16:06:45 herrb Exp $
+.\"
+.TH SHOWRGB 1 __xorgversion__
 .SH NAME
 showrgb \- uncompile an rgb color-name database
 .SH SYNOPSIS
@@ -41,5 +44,5 @@ the command line.  Specify the database name without
 the \fI.pag\fP or \fI.dir\fP suffix.
 .SH FILES
 .TP 20
-<XRoot>/lib/X11/rgb
+.I __projectroot__/lib/X11/rgb
 default database.
