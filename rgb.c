@@ -26,6 +26,7 @@ other dealings in this Software without prior written authorization
 from The Open Group.
 
 */
+/* $XFree86: xc/programs/rgb/rgb.c,v 3.9 2002/10/09 16:56:47 tsi Exp $ */
 
 
 /* reads from standard input lines of the form:
@@ -36,7 +37,7 @@ from The Open Group.
 #ifdef NDBM
 #include <ndbm.h>
 #else
-#ifdef SVR4
+#if defined(SVR4) && !defined(SCO325)
 #include <rpcsvc/dbm.h>
 #else
 #include <dbm.h>
@@ -48,16 +49,13 @@ from The Open Group.
 
 #undef NULL
 #include <stdio.h>
+#include <stdlib.h>
 #include <X11/Xos.h>
 #include "rgb.h"
 #include "site.h"
 #include <ctype.h>
 
 #include <errno.h>
-
-#ifdef X_NOT_STDC_ENV
-extern int errno;
-#endif
 
 char *ProgramName;
 
@@ -67,6 +65,7 @@ char *SysError ()
     return s ? s : "?";
 }
 
+int
 main(argc, argv)
     int argc;
     char **argv;
@@ -100,7 +99,7 @@ main(argc, argv)
     if (fd < 0) {
 	fprintf (stderr, 
 		 "%s:  unable to create dbm file \"%s\" (error %d, %s)\n",
-		 ProgramName, name, errno, SysError());
+		 ProgramName, name, errno, strerror(errno));
 	exit (1);
     }
     (void) close (fd);
@@ -111,7 +110,7 @@ main(argc, argv)
     if (fd < 0) {
 	fprintf (stderr, 
 		 "%s:  unable to create dbm file \"%s\" (error %d, %s)\n",
-		 ProgramName, name, errno, SysError());
+		 ProgramName, name, errno, strerror(errno));
 	exit (1);
     }
     (void) close (fd);
@@ -120,7 +119,7 @@ main(argc, argv)
     if (!rgb_dbm) {
 	fprintf (stderr,
 		 "%s:  unable to open dbm database \"%s\" (error %d, %s)\n",
-		 ProgramName, dbname, errno, SysError());
+		 ProgramName, dbname, errno, strerror(errno));
 	exit (1);
     }
 

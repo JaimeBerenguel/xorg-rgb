@@ -26,11 +26,13 @@ in this Software without prior written authorization from The Open Group.
  * Author:  Jim Fulton, MIT X Consortium
  */
 
+/* $XFree86: xc/programs/rgb/showrgb.c,v 3.9 2002/05/31 18:46:08 dawes Exp $ */
+
 #ifndef USE_RGB_TXT
 #ifdef NDBM
 #include <ndbm.h>
 #else
-#ifdef SVR4
+#if defined(SVR4) && !defined(SCO325)
 #include <rpcsvc/dbm.h>
 #else
 #include <dbm.h>
@@ -45,15 +47,16 @@ in this Software without prior written authorization from The Open Group.
 #undef NULL
 #include <stdio.h>
 #include <X11/Xos.h>
+#include <stdlib.h>
 #include "rgb.h"			/* off in server/include/ */
 #include "site.h"
 #include <X11/Xfuncs.h>
 
 char *ProgramName;
+static void dumprgb(char *filename);
 
-main (argc, argv)
-    int argc;
-    char *argv[];
+int
+main (int argc, char *argv[])
 {
     char *dbname = RGB_DB;
 
@@ -66,7 +69,7 @@ main (argc, argv)
 }
 
 #ifndef USE_RGB_TXT
-
+static void
 dumprgb (filename)
     char *filename;
 {
@@ -116,7 +119,7 @@ dumprgb (filename)
 }
 
 #else /* USE_RGB_TXT */
-
+static void
 dumprgb (filename)
     char *filename;
 {
@@ -126,10 +129,17 @@ dumprgb (filename)
     char name[BUFSIZ];
     int lineno = 0;
     int red, green, blue;
-   
+
+#ifdef __UNIXOS2__
+    char *root = (char*)getenv("X11ROOT");
+    sprintf(line,"%s%s.txt",root,filename);
+    path = (char *)malloc(strlen(line) + 1);
+    strcpy(path,line);
+#else
     path = (char *)malloc(strlen(filename) + 5);
     strcpy(path, filename);
     strcat(path, ".txt");
+#endif
 
     if (!(rgb = fopen(path, "r"))) {
 	fprintf (stderr, "%s:  unable to open rgb database \"%s\"\n",
@@ -140,7 +150,11 @@ dumprgb (filename)
 
     while(fgets(line, sizeof(line), rgb)) {
 	lineno++;
+#ifndef __UNIXOS2__
 	if (sscanf(line, "%d %d %d %[^\n]\n", &red, &green, &blue, name) == 4) {
+#else
+	if (sscanf(line, "%d %d %d %[^\n\r]\n", &red, &green, &blue, name) == 4) {
+#endif
 	    if (red >= 0 && red <= 0xff &&
 		green >= 0 && green <= 0xff &&
 		blue >= 0 && blue <= 0xff) {
