@@ -32,7 +32,7 @@ in this Software without prior written authorization from The Open Group.
 #ifdef NDBM
 #include <ndbm.h>
 #else
-#if defined(SVR4) && !defined(SCO325)
+#if defined(SVR4)
 #include <rpcsvc/dbm.h>
 #else
 #include <dbm.h>
