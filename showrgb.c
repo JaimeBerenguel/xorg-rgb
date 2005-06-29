@@ -48,8 +48,10 @@ in this Software without prior written authorization from The Open Group.
 #include <stdio.h>
 #include <X11/Xos.h>
 #include <stdlib.h>
+#ifndef USE_RGB_TXT
 #include "rgb.h"			/* off in server/include/ */
 #include "site.h"
+#endif
 #include <X11/Xfuncs.h>
 
 char *ProgramName;
