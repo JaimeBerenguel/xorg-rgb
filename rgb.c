@@ -1,4 +1,5 @@
 /* $Xorg: rgb.c,v 1.4 2001/02/09 02:05:35 xorgcvs Exp $ */
+/* $XdotOrg: $ */
 /*
 
 Copyright 1985, 1998  The Open Group
@@ -33,6 +34,10 @@ from The Open Group.
 	red green blue name
    where red/green/blue are decimal values, and inserts them in a database.
  */
+
+#ifdef HAVE_CONFIG_H
+# include "config.h"
+#endif
 
 #ifdef NDBM
 #include <ndbm.h>
