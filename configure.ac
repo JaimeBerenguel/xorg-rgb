@@ -79,5 +79,7 @@ esac
 AC_SUBST([RGB_DB_FILES])
 AM_CONDITIONAL(RGB_TXT, [test x$db_type = xtext])
 
+PKG_CHECK_MODULES(RGB, xproto)
+
 AC_SUBST(RGB_CFLAGS)
 AC_OUTPUT([Makefile])
