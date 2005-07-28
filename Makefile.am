@@ -49,6 +49,7 @@ dist_man_MANS = \
         showrgb.man
 
 EXTRA_DIST= \
+	rgb.txt \
 	others/README \
 	others/old-rgb.txt \
 	others/raveling.txt \
