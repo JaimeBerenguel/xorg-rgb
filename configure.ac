@@ -28,7 +28,7 @@ dnl
 dnl Process this file with autoconf to create configure.
 
 AC_PREREQ([2.57])
-AC_INIT(rgb,[7.0],[xorg@freedesktop.org],rgb)
+AC_INIT(rgb,[0.99.0],[https://bugs.freedesktop.org/enter_bug.cgi?product=xorg],rgb)
 AM_INIT_AUTOMAKE([dist-bzip2])
 AM_MAINTAINER_MODE
 
@@ -82,4 +82,7 @@ AM_CONDITIONAL(RGB_TXT, [test x$db_type = xtext])
 PKG_CHECK_MODULES(RGB, xproto)
 
 AC_SUBST(RGB_CFLAGS)
+
+XORG_RELEASE_VERSION
+
 AC_OUTPUT([Makefile])
