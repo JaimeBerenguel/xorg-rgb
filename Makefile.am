@@ -45,7 +45,7 @@ showrgb_CFLAGS = $(RGB_CFLAGS) $(RGB_DB_DEFINES)
 showrgb_LDADD = $(RGB_LIBS)
 showrgb_SOURCES =  showrgb.c
 
-dist_man_MANS = \
+dist_man1_MANS = \
         showrgb.man
 
 EXTRA_DIST= \
