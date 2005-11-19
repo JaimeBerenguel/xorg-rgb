@@ -33,7 +33,6 @@ else
 bin_PROGRAMS = rgb showrgb
 
 rgb_CFLAGS = $(RGB_CFLAGS) $(RGB_DB_DEFINES)
-rgb_LDADD = $(RGB_LIBS)
 rgb_SOURCES = rgb.c 
 endif
 
@@ -42,7 +41,6 @@ rgb_DATA = $(db_file).txt $(RGB_DB_FILES)
 RGB_DB_DEFINES = -DRGB_DB=\"$(db_dir)/$(db_file)\"
 
 showrgb_CFLAGS = $(RGB_CFLAGS) $(RGB_DB_DEFINES)
-showrgb_LDADD = $(RGB_LIBS)
 showrgb_SOURCES =  showrgb.c
 
 appman_SOURCES = \
