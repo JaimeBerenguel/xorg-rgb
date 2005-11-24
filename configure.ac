@@ -39,7 +39,7 @@ AC_PROG_INSTALL
 
 AC_MSG_CHECKING([for rgb database location])
 AC_ARG_WITH([rgb-db-dir],
-	AC_HELP_STRING([--with-rgb-db=<path>],
+	AC_HELP_STRING([--with-rgb-db-dir=<path>],
 		[rgb database location (default is libdir/X11/rgb)]),
 	[db_path=$withval], [db_path=$libdir/X11/rgb])
 AC_MSG_RESULT([$db_path])
