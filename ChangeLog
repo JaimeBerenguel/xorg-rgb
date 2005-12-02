@@ -1,3 +1,8 @@
+2005-12-01  Kevin E. Martin  <kem-at-freedesktop-dot-org>
+
+	* configure.ac:
+	Change the default rgb dir to be the same path as the X server.
+
 2005-11-23  Alan Coopersmith  <alan.coopersmith@sun.com>
 
 	* configure.ac: 
