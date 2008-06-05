@@ -1,6 +1,4 @@
 /*
- * $Xorg: showrgb.c,v 1.4 2001/02/09 02:05:35 xorgcvs Exp $
- * $XdotOrg: $
  *
 Copyright 1989, 1998  The Open Group
 
@@ -26,8 +24,6 @@ in this Software without prior written authorization from The Open Group.
  *
  * Author:  Jim Fulton, MIT X Consortium
  */
-
-/* $XFree86: xc/programs/rgb/showrgb.c,v 3.8 2001/12/14 20:01:04 dawes Exp $ */
 
 #ifdef HAVE_CONFIG_H
 # include "config.h"

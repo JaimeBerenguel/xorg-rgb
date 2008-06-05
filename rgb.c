@@ -1,5 +1,3 @@
-/* $Xorg: rgb.c,v 1.4 2001/02/09 02:05:35 xorgcvs Exp $ */
-/* $XdotOrg: $ */
 /*
 
 Copyright 1985, 1998  The Open Group
@@ -27,7 +25,6 @@ other dealings in this Software without prior written authorization
 from The Open Group.
 
 */
-/* $XFree86: xc/programs/rgb/rgb.c,v 3.8tsi Exp $ */
 
 
 /* reads from standard input lines of the form:
