@@ -37,6 +37,8 @@ AM_CONFIG_HEADER(config.h)
 AC_PROG_CC
 AC_PROG_INSTALL
 
+PKG_CHECK_MODULES(RGB, xproto)
+
 AC_MSG_CHECKING([for rgb database location])
 AC_ARG_WITH([rgb-db-dir],
 	AC_HELP_STRING([--with-rgb-db-dir=<path>],
@@ -65,7 +67,9 @@ case $db_type in
 	dbm)
 		AC_SEARCH_LIBS([dbminit], [db dbm],  [],
 				AC_MSG_ERROR([dbm requested but dbminit() not found in any libraries]))
-		RGB_DB_FILES="$(db_file).dir $(db_file).pag"
+		PKG_CHECK_MODULES(XORG, [xorg-server])
+		RGB_CFLAGS="$RGB_CFLAGS $XORG_CFLAGS"
+		RGB_DB_FILES='$(db_file).dir $(db_file).pag'
 		;;
 	ndbm)
 		# Find a dbm or ndbm implementation
@@ -73,13 +77,14 @@ case $db_type in
 				AC_DEFINE([NDBM], [1], 
 				 [Define to 1 if you have ndbm.h interfaces]),
 				AC_MSG_ERROR([ndbm requested but dbm_open() not found in any libraries]))
-		RGB_DB_FILES="$(db_file).dir $(db_file).pag"
+		PKG_CHECK_MODULES(XORG, [xorg-server])
+		RGB_CFLAGS="$RGB_CFLAGS $XORG_CFLAGS"
+		RGB_DB_FILES='$(db_file).dir $(db_file).pag'
 		;;
 esac
 AC_SUBST([RGB_DB_FILES])
 AM_CONDITIONAL(RGB_TXT, [test x$db_type = xtext])
 
-PKG_CHECK_MODULES(RGB, xproto)
 AC_SUBST(RGB_CFLAGS)
 
 XORG_MANPAGE_SECTIONS

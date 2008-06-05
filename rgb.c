@@ -57,23 +57,14 @@ from The Open Group.
 #include <stdlib.h>
 #include <X11/Xos.h>
 #include "rgb.h"
-#include "site.h"
 #include <ctype.h>
 
 #include <errno.h>
 
-char *ProgramName;
-
-char *SysError ()
-{
-    register char *s = strerror(errno);
-    return s ? s : "?";
-}
+static char *ProgramName;
 
 int
-main(argc, argv)
-    int argc;
-    char **argv;
+main(int argc, char **argv)
 {
     char *dbname;
     char line[512];

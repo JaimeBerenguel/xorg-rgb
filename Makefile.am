@@ -32,15 +32,18 @@ bin_PROGRAMS = showrgb
 else
 bin_PROGRAMS = rgb showrgb
 
-rgb_CFLAGS = $(RGB_CFLAGS) $(RGB_DB_DEFINES)
 rgb_SOURCES = rgb.c 
+
+$(RGB_DB_FILES): rgb rgb.txt
+	-rm -f $(RGB_DB_FILES)
+	./rgb rgb < $(srcdir)/rgb.txt
 endif
 
 rgbdir = $(db_dir)
 rgb_DATA = $(db_file).txt $(RGB_DB_FILES)
 RGB_DB_DEFINES = -DRGB_DB=\"$(db_dir)/$(db_file)\"
+AM_CFLAGS = $(RGB_CFLAGS) $(RGB_DB_DEFINES)
 
-showrgb_CFLAGS = $(RGB_CFLAGS) $(RGB_DB_DEFINES)
 showrgb_SOURCES =  showrgb.c
 
 appman_PRE = \

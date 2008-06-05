@@ -55,11 +55,10 @@ in this Software without prior written authorization from The Open Group.
 #include <stdlib.h>
 #ifndef USE_RGB_TXT
 #include "rgb.h"			/* off in server/include/ */
-#include "site.h"
 #endif
 #include <X11/Xfuncs.h>
 
-char *ProgramName;
+static char *ProgramName;
 static void dumprgb(char *filename);
 
 int
@@ -77,8 +76,7 @@ main (int argc, char *argv[])
 
 #ifndef USE_RGB_TXT
 static void
-dumprgb (filename)
-    char *filename;
+dumprgb (char *filename)
 {
 #ifdef NDBM
     DBM *rgb_dbm;
