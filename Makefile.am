@@ -61,7 +61,7 @@ appmandir = $(APP_MAN_DIR)
 appman_DATA = $(appman_PRE:man=@APP_MAN_SUFFIX@)
 
 EXTRA_DIST += $(appman_PRE)
-CLEANFILES = $(appman_DATA)
+CLEANFILES = $(appman_DATA) $(RGB_DB_FILES)
 
 SED = sed
 
@@ -70,6 +70,7 @@ XORGRELSTRING = @PACKAGE_STRING@
   XORGMANNAME = X Version 11
 
 MAN_SUBSTS = \
+	-e 's|__RGB_DB__|$(db_dir)/$(db_file)|' \
 	-e 's|__vendorversion__|"$(XORGRELSTRING)" "$(XORGMANNAME)"|' \
 	-e 's|__xorgversion__|"$(XORGRELSTRING)" "$(XORGMANNAME)"|' \
 	-e 's|__xservername__|Xorg|g' \

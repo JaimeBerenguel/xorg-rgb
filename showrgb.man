@@ -24,7 +24,7 @@
 .\"
 .TH SHOWRGB 1 __xorgversion__
 .SH NAME
-showrgb \- uncompile an rgb color-name database
+showrgb \- display an rgb color-name database
 .SH SYNOPSIS
 .B showrgb
 [
@@ -33,13 +33,13 @@ showrgb \- uncompile an rgb color-name database
 .SH DESCRIPTION
 The
 .I showrgb
-program reads an rgb color-name database compiled for use with the dbm
-database routines and converts it back to source form, printing the
+program reads an rgb color-name database from a text file or
+database and converts it back to source form, printing the
 result to standard output.  The default
 database is the one that X was built with, and may be overridden on
 the command line.  Specify the database name without
-the \fI.pag\fP or \fI.dir\fP suffix.
+the \fI.txt\fP, \fI.pag\fP or \fI.dir\fP suffix.
 .SH FILES
 .TP 20
-.I __projectroot__/lib/X11/rgb
+.I __RGB_DB__
 default database.
