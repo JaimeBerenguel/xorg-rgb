@@ -65,23 +65,31 @@ case $db_type in
 			[Define to 1 to use plain text files for rgb database])
 		;;
 	dbm)
-		AC_SEARCH_LIBS([dbminit], [db dbm],  [],
+		AC_SEARCH_LIBS([dbminit], [db dbm nsl], [],
 				AC_MSG_ERROR([dbm requested but dbminit() not found in any libraries]))
+		AC_CHECK_HEADER([dbm.h], [DBM_HEADER='<dbm.h>'],
+		  [AC_CHECK_HEADER([rpcsvc/dbm.h], [DBM_HEADER='<rpcsvc/dbm.h>'],
+		    [AC_MSG_ERROR([dbm requested but dbm.h not found])])])
 		PKG_CHECK_MODULES(XORG, [xorg-server])
 		RGB_CFLAGS="$RGB_CFLAGS $XORG_CFLAGS"
 		RGB_DB_FILES='$(db_file).dir $(db_file).pag'
 		;;
 	ndbm)
 		# Find a dbm or ndbm implementation
-		AC_SEARCH_LIBS([dbm_open], [db ndbm dbm],  
-				AC_DEFINE([NDBM], [1], 
+		AC_SEARCH_LIBS([dbm_open], [db ndbm dbm],
+				AC_DEFINE([NDBM], [1],
 				 [Define to 1 if you have ndbm.h interfaces]),
 				AC_MSG_ERROR([ndbm requested but dbm_open() not found in any libraries]))
+		DBM_HEADER='<ndbm.h>'
 		PKG_CHECK_MODULES(XORG, [xorg-server])
 		RGB_CFLAGS="$RGB_CFLAGS $XORG_CFLAGS"
 		RGB_DB_FILES='$(db_file).dir $(db_file).pag'
 		;;
 esac
+if test x$DBM_HEADER != x ; then
+  AC_DEFINE_UNQUOTED([DBM_HEADER], [$DBM_HEADER], 
+		     [Header file to include for dbm functions])
+fi
 AC_SUBST([RGB_DB_FILES])
 AM_CONDITIONAL(RGB_TXT, [test x$db_type = xtext])
 

@@ -34,14 +34,8 @@ in this Software without prior written authorization from The Open Group.
 #endif
 
 #ifndef USE_RGB_TXT
-#ifdef NDBM
-#include <ndbm.h>
-#else
-#if defined(SVR4)
-#include <rpcsvc/dbm.h>
-#else
-#include <dbm.h>
-#endif
+#include DBM_HEADER
+#ifndef NDBM
 #define dbm_open(name,flags,mode) (!dbminit(name))
 #define dbm_firstkey(db) (firstkey())
 #define dbm_fetch(db,key) (fetch(key))

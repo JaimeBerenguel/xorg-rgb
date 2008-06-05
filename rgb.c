@@ -39,14 +39,8 @@ from The Open Group.
 # include "config.h"
 #endif
 
-#ifdef NDBM
-#include <ndbm.h>
-#else
-#if defined(SVR4)
-#include <rpcsvc/dbm.h>
-#else
-#include <dbm.h>
-#endif
+#include DBM_HEADER
+#ifndef NDBM
 #define dbm_open(name,flags,mode) (!dbminit(name))
 #define dbm_store(db,key,content,flags) (store(key,content))
 #define dbm_close(db) dbmclose()
