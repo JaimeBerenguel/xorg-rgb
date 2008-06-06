@@ -58,6 +58,8 @@ AC_ARG_WITH([rgb-db-type],
 	[db_type=$withval], [db_type="text"])
 AC_MSG_RESULT([$db_type])
 
+RGB_DB_TYPE=$db_type
+
 case $db_type in
 	text)
 		RGB_DB_FILES=""
@@ -90,8 +92,9 @@ if test x$DBM_HEADER != x ; then
   AC_DEFINE_UNQUOTED([DBM_HEADER], [$DBM_HEADER], 
 		     [Header file to include for dbm functions])
 fi
+AC_SUBST([RGB_DB_TYPE])
 AC_SUBST([RGB_DB_FILES])
-AM_CONDITIONAL(RGB_TXT, [test x$db_type = xtext])
+AM_CONDITIONAL(RGB_DB, [test x$db_type != xtext])
 
 AC_SUBST(RGB_CFLAGS)
 

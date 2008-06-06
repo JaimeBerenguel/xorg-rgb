@@ -1,4 +1,4 @@
-# Copyright 2005 Sun Microsystems, Inc.  All rights reserved.
+# Copyright 2008 Sun Microsystems, Inc.  All rights reserved.
 # 
 # Permission is hereby granted, free of charge, to any person obtaining a
 # copy of this software and associated documentation files (the
@@ -27,12 +27,18 @@
 # 
 
 
-if RGB_TXT
 bin_PROGRAMS = showrgb
-else
-bin_PROGRAMS = rgb showrgb
+
+showrgb_SOURCES =  showrgb.c
+
+appman_PRE = showrgb.man
+
+if RGB_DB
+bin_PROGRAMS += rgb
 
 rgb_SOURCES = rgb.c 
+
+appman_PRE += rgb.man
 
 $(RGB_DB_FILES): rgb rgb.txt
 	-rm -f $(RGB_DB_FILES)
@@ -43,11 +49,6 @@ rgbdir = $(db_dir)
 rgb_DATA = $(db_file).txt $(RGB_DB_FILES)
 RGB_DB_DEFINES = -DRGB_DB=\"$(db_dir)/$(db_file)\"
 AM_CFLAGS = $(RGB_CFLAGS) $(RGB_DB_DEFINES)
-
-showrgb_SOURCES =  showrgb.c
-
-appman_PRE = \
-        showrgb.man
 
 EXTRA_DIST= \
 	rgb.txt \
@@ -71,6 +72,9 @@ XORGRELSTRING = @PACKAGE_STRING@
 
 MAN_SUBSTS = \
 	-e 's|__RGB_DB__|$(db_dir)/$(db_file)|' \
+	-e 's|__RGB_DB_DIR__|$(db_dir)|' \
+	-e 's|__RGB_DB_TYPE__|$(RGB_DB_TYPE)|' \
+	-e 's|__RGB_DB_FILES__|$(RGB_DB_FILES)|' \
 	-e 's|__vendorversion__|"$(XORGRELSTRING)" "$(XORGMANNAME)"|' \
 	-e 's|__xorgversion__|"$(XORGRELSTRING)" "$(XORGMANNAME)"|' \
 	-e 's|__xservername__|Xorg|g' \
