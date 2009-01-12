@@ -19,3 +19,7 @@ showrgb
 showrgb.1
 stamp-h1
 *~
+*.o
+rgb-*.tar.*
+ChangeLog
+tags
