@@ -42,7 +42,7 @@ endif
 rgbdir = $(db_dir)
 rgb_DATA = $(db_file).txt $(RGB_DB_FILES)
 RGB_DB_DEFINES = -DRGB_DB=\"$(db_dir)/$(db_file)\"
-AM_CFLAGS = $(RGB_CFLAGS) $(RGB_DB_DEFINES)
+AM_CFLAGS = $(RGB_CFLAGS) $(RGB_DB_DEFINES) $(CWARNFLAGS)
 
 EXTRA_DIST= \
 	rgb.txt \
