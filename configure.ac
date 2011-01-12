@@ -92,7 +92,6 @@ fi
 AC_SUBST([RGB_DB_TYPE])
 AC_SUBST([RGB_DB_FILES])
 AM_CONDITIONAL(RGB_DB, [test x$db_type != xtext])
-AC_SUBST(RGB_CFLAGS)
 
 AC_CONFIG_FILES([Makefile
                  man/Makefile])
