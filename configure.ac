@@ -38,7 +38,7 @@ PKG_CHECK_MODULES(RGB, xproto)
 
 AC_MSG_CHECKING([for rgb database location])
 AC_ARG_WITH([rgb-db-dir],
-	AC_HELP_STRING([--with-rgb-db-dir=<path>],
+	AS_HELP_STRING([--with-rgb-db-dir=<path>],
 		[rgb database location (default is ${datadir}/X11/rgb)]),
 	[db_path=$withval], [db_path=${datadir}/X11/rgb])
 AC_MSG_RESULT([$db_path])
@@ -50,7 +50,7 @@ AC_SUBST([db_dir])
 
 AC_MSG_CHECKING([for rgb database format])
 AC_ARG_WITH([rgb-db-type],
-	AC_HELP_STRING([--with-rgb-db-type=(text|dbm|ndbm)],
+	AS_HELP_STRING([--with-rgb-db-type=(text|dbm|ndbm)],
 		[rgb database type (default is text)]),
 	[db_type=$withval], [db_type="text"])
 AC_MSG_RESULT([$db_type])
