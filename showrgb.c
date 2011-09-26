@@ -49,12 +49,12 @@ in this Software without prior written authorization from The Open Group.
 #include <X11/Xfuncs.h>
 
 static char *ProgramName;
-static void dumprgb(char *filename);
+static void dumprgb(const char *filename);
 
 int
 main (int argc, char *argv[])
 {
-    char *dbname = RGB_DB;
+    const char *dbname = RGB_DB;
 
     ProgramName = argv[0];
     if (argc == 2)
@@ -66,7 +66,7 @@ main (int argc, char *argv[])
 
 #ifndef USE_RGB_TXT
 static void
-dumprgb (char *filename)
+dumprgb (const char *filename)
 {
 #ifdef NDBM
     DBM *rgb_dbm;
@@ -115,7 +115,7 @@ dumprgb (char *filename)
 
 #else /* USE_RGB_TXT */
 static void
-dumprgb (char *filename)
+dumprgb (const char *filename)
 {
     FILE *rgb;
     char *path;
