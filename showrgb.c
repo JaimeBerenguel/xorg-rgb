@@ -124,16 +124,9 @@ dumprgb (const char *filename)
     int lineno = 0;
     int red, green, blue;
 
-#ifdef __UNIXOS2__
-    char *root = (char*)getenv("X11ROOT");
-    sprintf(line,"%s%s.txt",root,filename);
-    path = (char *)malloc(strlen(line) + 1);
-    strcpy(path,line);
-#else
     path = (char *)malloc(strlen(filename) + 5);
     strcpy(path, filename);
     strcat(path, ".txt");
-#endif
 
     if (!(rgb = fopen(path, "r"))) {
 	fprintf (stderr, "%s:  unable to open rgb database \"%s\"\n",
@@ -144,11 +137,7 @@ dumprgb (const char *filename)
 
     while(fgets(line, sizeof(line), rgb)) {
 	lineno++;
-#ifndef __UNIXOS2__
 	if (sscanf(line, "%d %d %d %[^\n]\n", &red, &green, &blue, name) == 4) {
-#else
-	if (sscanf(line, "%d %d %d %[^\n\r]\n", &red, &green, &blue, name) == 4) {
-#endif
 	    if (red >= 0 && red <= 0xff &&
 		green >= 0 && green <= 0xff &&
 		blue >= 0 && blue <= 0xff) {
