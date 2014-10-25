@@ -135,7 +135,7 @@ dumprgb (const char *filename)
     strcat(path, ".txt");
 #endif
 
-    if (!(rgb = fopen(path, "r"))) {
+    if (!(rgb = fopen(path, "r")) && !(rgb = fopen(filename, "r"))) {
 	fprintf (stderr, "%s:  unable to open rgb database \"%s\"\n",
 		 ProgramName, filename);
 	free(path);
