@@ -124,9 +124,16 @@ dumprgb (const char *filename)
     int lineno = 0;
     int red, green, blue;
 
+#ifdef HAVE_ASPRINTF
+    if (asprintf(&path, "%s.txt", filename) == -1) {
+        perror (ProgramName);
+        exit (1);
+    }
+#else
     path = (char *)malloc(strlen(filename) + 5);
     strcpy(path, filename);
     strcat(path, ".txt");
+#endif
 
     if (!(rgb = fopen(path, "r"))) {
 	fprintf (stderr, "%s:  unable to open rgb database \"%s\"\n",
